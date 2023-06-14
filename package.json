@@ -1,6 +1,6 @@
 {
   "name": "sql-run",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "sql-run CLI",
   "private": false,
   "bin": {

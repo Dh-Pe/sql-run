@@ -11,7 +11,7 @@ CLI SGBD MySQL via linha de comando.
 $ npm install sql-run -g
 
 # Via yarn
-$ yarn global add sql-run -g
+$ yarn global add sql-run
 ```
 
 ## Utilização
