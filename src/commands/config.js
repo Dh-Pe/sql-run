@@ -16,15 +16,16 @@ const command = {
     const ifExists = ifExistsSQL['COUNT(*)']
 
     if (ifExists == 0) {
-      sql = `INSERT INTO dbconfig (user, database, password) VALUES ('teste', 'teste', 'teste')`
+      sql = `INSERT INTO dbconfig (password) VALUES (null)`
       await sqlite.exec(sql)
     }
 
-    const invalidValues = ['-u', '-db', '-p']
+    const invalidValues = ['-u', '-db', '-p', '-h']
 
     let findUser = await args.find((arg) => arg == '-u')
     let findDatabase = await args.find((arg) => arg == '-db')
     let findPassword = await args.find((arg) => arg == '-p')
+    let findHost = await args.find((arg) => arg == '-h')
 
     if (findUser) {
       let positionValue = args.indexOf(findUser) + 1
@@ -38,7 +39,7 @@ const command = {
       } else {
         sql = `UPDATE dbconfig SET user = '${args[positionValue]}'`
         await sqlite.run(sql)
-        print.success('Usuário definido como ' + args[positionValue])
+        print.success('Usuário alterado')
       }
     }
 
@@ -54,7 +55,7 @@ const command = {
       } else {
         sql = `UPDATE dbconfig SET database = '${args[positionValue]}'`
         await sqlite.run(sql)
-        print.success('Database definida como ' + args[positionValue])
+        print.success('Database alterada')
       }
     }
 
@@ -70,9 +71,26 @@ const command = {
       } else {
         sql = `UPDATE dbconfig SET password = '${args[positionValue]}'`
         await sqlite.run(sql)
-        print.success('Senha definida como ' + args[positionValue])
+        print.success('Senha alterada')
       }
     }
+
+    if (findHost) {
+      let positionValue = args.indexOf(findHost) + 1
+
+      if (
+        !args[positionValue] ||
+        invalidValues.includes(args[positionValue]) ||
+        args[positionValue].toString().trim() == ''
+      ) {
+        print.error('Host inválido')
+      } else {
+        sql = `UPDATE dbconfig SET host = '${args[positionValue]}'`
+        await sqlite.run(sql)
+        print.success('Host alterado')
+      }
+    }
+
     sqlite.close()
   },
 }

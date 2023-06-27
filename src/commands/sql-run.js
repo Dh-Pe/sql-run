@@ -1,4 +1,5 @@
 const mysqlInstance = require('../databases/mysql.js')
+const createTableCLI = require('../modules/createTableCLI.js')
 
 const command = {
   name: 'sql-run',
@@ -12,12 +13,12 @@ const command = {
       const mysql = await mysqlInstance()
       const sql = dadosArray.join(' ')
 
-      mysql.query(sql, (err, results) => {
+      mysql.query(sql, async (err, results) => {
         if (err) {
           print.error('SQL inválida')
         } else {
           print.success('Query executada com sucesso')
-          print.info(results)
+          print.info(await createTableCLI(results))
         }
       })
 

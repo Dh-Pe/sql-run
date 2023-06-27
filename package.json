@@ -1,7 +1,7 @@
 {
   "name": "sql-run",
-  "version": "0.0.3",
-  "description": "sql-run CLI",
+  "version": "0.0.4",
+  "description": "Biblioteca para utilização do MySQL via terminal",
   "private": false,
   "bin": {
     "sql-run": "bin/sql-run"
@@ -22,6 +22,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "cli-table": "^0.3.11",
     "gluegun": "latest",
     "mysql2": "^3.3.5",
     "sqlite": "^4.2.1",
@@ -48,5 +49,12 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged"
     }
-  }
+  },
+  "keywords": [
+    "mysql",
+    "cli",
+    "mysql-cli",
+    "sqlite",
+    "sql-run"
+  ]
 }
